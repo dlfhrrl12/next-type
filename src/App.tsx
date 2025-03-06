@@ -57,6 +57,7 @@ function App() {
       })
     );
   };
+
   return (
     <>
       <input type="text" value={title} onChange={titleChange} />
@@ -101,14 +102,17 @@ function TodoItem({
   onDeleteClick,
   onToggleClick,
 }: TodoItemProps) {
+  const todoItemStyle: React.CSSProperties = {
+    textDecoration: completed ? "line-through" : "none",
+  };
   return (
-    <div>
-      <div>{id}</div>
-      <div onClick={() => onToggleClick({ id, completed })}>{title}</div>
-      <div>{`${completed}`}</div>
-      <button onClick={() => onDeleteClick(id)}>삭제</button> <br />
-      ---
-    </div>
+    <ul>
+      <li style={todoItemStyle}>{title}</li>
+      <button onClick={() => onToggleClick({ id, completed })}>
+        {completed ? "취소하기" : "완료하기"}
+      </button>
+      <button onClick={() => onDeleteClick(id)}>삭제</button>
+    </ul>
   );
 }
 
